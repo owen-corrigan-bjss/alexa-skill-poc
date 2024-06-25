@@ -2,3 +2,5 @@ node_modules/
 alexa-skill-to-comp/
 .DS_Store
 index.js
+*.zip
+
