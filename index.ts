@@ -50,6 +50,27 @@ import {
     },
   };
 
+  const PlayAudioHandler: RequestHandler = {
+    canHandle(handlerInput: HandlerInput): boolean {
+      const request = handlerInput.requestEnvelope.request;  
+      return request.type === 'IntentRequest'
+        && request.intent.name === 'PlayAudioIntent';
+    },
+    async handle(handlerInput: HandlerInput): Promise<Response> {
+        let speechText = Audio
+        if(speechText) {
+            return handlerInput.responseBuilder
+            .addAudioPlayerPlayDirective('REPLACE_ALL','https://soundcloud.com/owenchapman-1/3-x-2', '', 0)
+            .withSimpleCard('newsLetter: ', '3 x 2')
+            .getResponse();
+        }
+        return handlerInput.responseBuilder
+        .speak('something went wrong')
+        .withSimpleCard('newsLetter: ', 'something went wrong')
+        .getResponse();
+    },
+  };
+
   const HelpIntentHandler: RequestHandler = {
     canHandle(handlerInput: HandlerInput): boolean {
       const request = handlerInput.requestEnvelope.request;    
